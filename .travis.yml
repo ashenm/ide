@@ -1,0 +1,15 @@
+language:
+  minimal
+
+services:
+  docker
+
+install:
+  ./.travis/install.sh
+
+script:
+  ./.travis/build.sh
+
+deploy:
+  provider: script
+  script: ./.travis/deploy.sh

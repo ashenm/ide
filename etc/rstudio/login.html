@@ -1,0 +1,37 @@
+<style>
+
+  body {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  label[for="staySignedIn"] {
+    position: relative;
+    visibility: hidden;
+  }
+
+  label[for="staySignedIn"]::after {
+    visibility: visible;
+    content: "Save Session";
+    position: absolute;
+    left: 0;
+  }
+
+  #banner {
+    display: none;
+  }
+
+  #caption {
+    display: none;
+  }
+
+  #border td > p:nth-child(4) {
+    text-align: center;
+  }
+
+</style>
