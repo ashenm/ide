@@ -1,4 +1,4 @@
-FROM ashenm/baseimage:dev
+FROM ashenm/baseimage:developer
 
 ARG USER_PASSWORD=ashenm
 ARG DEBIAN_FRONTEND=noninteractive
