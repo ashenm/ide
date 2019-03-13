@@ -10,5 +10,6 @@ find etc sbin -type d -exec chmod 755 {} \;
 find etc/sudoers.d -type d -exec chmod 750 {} \;
 find etc/sudoers.d -type f -exec chmod 440 {} \;
 
-# build :developer
-docker build --tag "ashenm/ide:developer" .
+# build :latest
+echo "${USER_PASSWORD:-ashenm}" \
+  | xargs -I '@I' docker build --tag "${TRAVIS_REPO_SLUG:-ashenm/ide}:${TRAVIS_BRANCH:-latest-alpha}" --build-arg USER_PASSWORD="@I" .
