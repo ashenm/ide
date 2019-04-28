@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
-# Remove Docker Images
+# Remove Untagged Docker Images
 
-docker rmi --force ashenm/ide:developer
+exec docker images --filter dangling=true --format "{{.ID}}" | xargs -r docker rmi

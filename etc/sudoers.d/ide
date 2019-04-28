@@ -1,5 +1,0 @@
-# Snub umask union
-Defaults umask_override
-
-# Allow members of group sudo sudo access without password
-%sudo ALL=(ALL) NOPASSWD:ALL

@@ -1,8 +1,14 @@
 build:
 	./scripts/build.sh
 
-run:
-	./scripts/run.sh
-
 clean:
 	./scripts/clean.sh
+
+deploy:
+	./scripts/deploy.sh
+
+purge:
+	./scripts/purge.sh
+
+run:
+	./scripts/run.sh

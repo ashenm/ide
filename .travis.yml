@@ -4,12 +4,9 @@ language:
 services:
   docker
 
-install:
-  ./.travis/install.sh
-
 script:
-  ./.travis/build.sh
+  make build
 
 deploy:
   provider: script
-  script: ./.travis/deploy.sh
+  script: make deploy

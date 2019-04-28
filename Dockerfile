@@ -1,29 +1,23 @@
-FROM ashenm/baseimage:dev
+FROM ashenm/workspace
 
-ARG USER_PASSWORD=ashenm
+# avoid prompts
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
-  apt-get install --yes --no-install-recommends \
-    dirmngr \
-    gdebi-core && \
-  rm -rf /var/lib/apt/lists/*
+# expose tcp ports
+EXPOSE 5050 8080 8081 8082
 
-RUN echo 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/' | \
-    tee /etc/apt/sources.list.d/cran.list && \
-  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
-  apt-get update && \
-  apt-get install --yes --no-install-recommends \
-    r-base && \
-  curl -sSLo /tmp/rstudio-server-1.1.463-amd64.deb https://download2.rstudio.org/rstudio-server-1.1.463-amd64.deb && \
-  gdebi --non-interactive /tmp/rstudio-server-1.1.463-amd64.deb && \
-  rm -rf /var/lib/apt/lists/* /tmp/rstudio-server-1.1.463-amd64.deb
+# cloud9 core
+# https://github.com/c9/core
+RUN git clone https://github.com/c9/core.git /home/ubuntu/.c9sdk && \
+  /home/ubuntu/.c9sdk/scripts/install-sdk.sh 
 
-RUN groupadd --gid 1000 ashenm && \
-  useradd --create-home --uid 1000 --gid ashenm --groups sudo ashenm && \
-  echo "ashenm:$USER_PASSWORD" | chpasswd
+# startup script
+COPY --chown=ubuntu:ubuntu ide/c9sdk /home/ubuntu/.c9sdk/
 
-COPY sbin /usr/local/sbin/
-COPY etc /etc/
+# default disable authentication
+RUN echo -n ':' > /tmp/credentials
 
-ENTRYPOINT ["/usr/local/sbin/ide"]
+# configure env
+COPY ide/etc /etc/
+
+ENTRYPOINT ["/home/ubuntu/.c9sdk/start-server.sh"]
