@@ -7,11 +7,8 @@ clean:
 deploy:
 	./scripts/deploy.sh
 
-install:
-	./scripts/install.sh
-
 purge:
-	./scripts/clean.sh --all
+	./scripts/purge.sh
 
 run:
 	./scripts/run.sh

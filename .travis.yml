@@ -4,9 +4,6 @@ language:
 services:
   docker
 
-install:
-  make install
-
 script:
   make build
 

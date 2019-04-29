@@ -1,10 +1,6 @@
 #!/usr/bin/env sh
+# Deploy Docker Image
 
-set -e
-
-# authenticate
-echo "${DOCKER_PASSWORD}" \
-  | docker login --username "${DOCKER_USERNAME}" --password-stdin
-
-# deploy image
-docker push "${TRAVIS_REPO_SLUG:-ashenm/ide}:${TRAVIS_BRANCH:-latest-alpha}"
+exec echo "$DOCKER_PASSWORD" | \
+  docker login --username "${DOCKER_USERNAME}" --password-stdin && \
+  docker push "${TRAVIS_REPO_SLUG:-ashenm/ide:latest-alpha}"

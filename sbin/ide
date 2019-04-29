@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-set -e
-
-rstudio-server start
-
-sleep infinity
